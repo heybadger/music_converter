@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.5"
+    />
+    <title>badger.exe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="blob blob--1"></div>
+    <div class="blob blob--2"></div>
+
+    <div class="app" id="app">
+      <header
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.2rem 0 1.8rem;
+        "
+      >
+        <div style="display: flex; align-items: center; gap: 0.3rem">
+          <span
+            style="
+              font-weight: 700;
+              font-size: 1.8rem;
+              letter-spacing: -0.03em;
+              background: linear-gradient(135deg, #ff6fae, #ff9bc2);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            "
+            >Badger's</span
+          >
+          <span
+            style="
+              font-weight: 300;
+              opacity: 0.6;
+              font-size: 1.2rem;
+              margin-left: 4px;
+            "
+          ></span>
+          <span
+            style="
+              font-weight: 500;
+              font-size: 1.2rem;
+              letter-spacing: -0.01em;
+              background: linear-gradient(135deg, #ff6fae, #ff9bc2);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            "
+            >Music/Video Converter</span
+          >
+        </div>
+        <button
+          class="btn-outline"
+          id="darkToggle"
+          aria-label="Toggle dark mode"
+        >
+          <i data-lucide="moon" style="width: 18px; height: 18px"></i>
+          <span style="display: inline-block">Theme</span>
+        </button>
+      </header>
+
+      <p
+        style="
+          font-weight: 300;
+          letter-spacing: 0.2px;
+          color: #5a4a50;
+          margin-bottom: 0.2rem;
+        "
+        class="dark:text-gray-300"
+      >
+        Fast, Beautiful & High-Quality Media Conversion.
+      </p>
+
+      <section
+        class="glass"
+        style="padding: 2.5rem 2.8rem; margin: 1.2rem 0 2.5rem"
+      >
+        <h1
+          style="
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+          "
+        >
+          Paste · Convert ·<br /><span
+            style="
+              background: linear-gradient(135deg, #ff6fae, #ff9bc2);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
+            "
+            >Download in seconds</span
+          >
+        </h1>
+        <p style="margin: 0.8rem 0 1.8rem; opacity: 0.7; max-width: 480px">
+          YouTube to MP3, WAV, MP4, MOV — premium quality, no registration.
+        </p>
+
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            align-items: center;
+          "
+        >
+          <div style="flex: 2; min-width: 240px; position: relative">
+            <input
+              type="text"
+              id="urlInput"
+              class="input-url"
+              placeholder="Paste YouTube link here..."
+              aria-label="YouTube URL"
+            />
+            <div
+              style="
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex;
+                gap: 6px;
+              "
+            >
+              <button
+                class="btn-outline"
+                style="padding: 0.3rem 0.8rem; border-radius: 30px"
+                id="pasteBtn"
+                aria-label="Paste from clipboard"
+              >
+                <i
+                  data-lucide="clipboard"
+                  style="width: 16px; height: 16px"
+                ></i>
+              </button>
+              <button
+                class="btn-outline"
+                style="padding: 0.3rem 0.8rem; border-radius: 30px"
+                id="clearBtn"
+                aria-label="Clear input"
+              >
+                <i data-lucide="x" style="width: 16px; height: 16px"></i>
+              </button>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              gap: 0.8rem;
+              align-items: center;
+            "
+          >
+            <select
+              id="formatSelect"
+              class="quality-select"
+              aria-label="Format"
+            >
+              <option value="mp3">MP3</option>
+              <option value="wav">WAV</option>
+              <option value="mp4">MP4</option>
+              <option value="mov">MOV</option>
+            </select>
+            <select
+              id="qualitySelect"
+              class="quality-select"
+              aria-label="Quality"
+            >
+              <option value="best">Best Quality</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+            <button class="btn-primary" id="convertBtn">
+              <i data-lucide="download" style="width: 20px; height: 20px"></i>
+              Convert
+            </button>
+          </div>
+        </div>
+
+        <div style="margin: 1.6rem 0 0.2rem">
+          <div class="progress-bar" id="progressContainer">
+            <div
+              class="progress-fill"
+              id="progressFill"
+              style="width: 0%"
+            ></div>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.9rem;
+            "
+          >
+            <span id="statusText">Ready</span>
+            <span id="progressPercent">0%</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">How It Works</h2>
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+          "
+        >
+          <div
+            style="flex: 1; min-width: 140px; transition: none"
+            class="card-soft"
+            style="padding: 1.4rem; text-align: center; transition: none"
+          >
+            <span
+              style="
+                background: #ffc1d9;
+                padding: 0.3rem 1rem;
+                border-radius: 40px;
+                font-weight: 600;
+              "
+              >1</span
+            >
+            <p style="margin-top: 0.4rem">Paste YouTube Link</p>
+          </div>
+          <div
+            style="flex: 1; min-width: 140px; transition: none"
+            class="card-soft"
+            style="padding: 1.4rem; text-align: center; transition: none"
+          >
+            <span
+              style="
+                background: #ffc1d9;
+                padding: 0.3rem 1rem;
+                border-radius: 40px;
+                font-weight: 600;
+              "
+              >2</span
+            >
+            <p style="margin-top: 0.4rem">Choose Format</p>
+          </div>
+          <div
+            style="flex: 1; min-width: 140px; transition: none"
+            class="card-soft"
+            style="padding: 1.4rem; text-align: center; transition: none"
+          >
+            <span
+              style="
+                background: #ffc1d9;
+                padding: 0.3rem 1rem;
+                border-radius: 40px;
+                font-weight: 600;
+              "
+              >3</span
+            >
+            <p style="margin-top: 0.4rem">Convert</p>
+          </div>
+          <div
+            style="flex: 1; min-width: 140px; transition: none"
+            class="card-soft"
+            style="padding: 1.4rem; text-align: center; transition: none"
+          >
+            <span
+              style="
+                background: #ffc1d9;
+                padding: 0.3rem 1rem;
+                border-radius: 40px;
+                font-weight: 600;
+              "
+              >4</span
+            >
+            <p style="margin-top: 0.4rem">Download</p>
+          </div>
+        </div>
+      </section>
+
+      <footer
+        style="
+          margin-top: 4rem;
+          border-top: 1px solid rgba(255, 193, 217, 0.2);
+          padding: 2rem 0 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        "
+      >
+        <div style="display: flex; gap: 1.8rem; flex-wrap: wrap">
+          <a
+            href="#"
+            style="
+              text-decoration: none;
+              color: inherit;
+              opacity: 0.6;
+              display: flex;
+              align-items: center;
+              gap: 0.3rem;
+            "
+          >
+            <i data-lucide="github" style="width: 18px; height: 18px"></i>
+            GitHub
+          </a>
+        </div>
+        <span style="opacity: 0.4; font-size: 0.9rem">badger.exe</span>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
